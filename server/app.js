@@ -1,9 +1,14 @@
-const http = require("http")
+const express = require("express");
+const bodyParser = require("body-parser");
 
-const express = require("express")
+const app = express();
 
-const app = express()
+const adminRoutes = require("./routes/admin");
+const flashcardsRoutes = require("./routes/flashcards");
 
-const server = http.createServer(app)
+app.use(bodyParser.urlencoded({ extended: false }));
 
-server.listen(4000)
+app.use(adminRoutes);
+// app.use(flashcardsRoutes);
+
+app.listen(4000);
