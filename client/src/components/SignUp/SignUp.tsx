@@ -1,6 +1,6 @@
 import React, { useState, FC, FormEvent, ChangeEvent } from "react"
 import { useHistory } from "react-router-dom"
-import { fetchData } from "common/utils"
+import { fetchData, setToken } from "common/utils"
 import { Input } from "common/UI"
 import { inputList } from "./utils"
 import * as S from "./SignUp.styles"
@@ -29,6 +29,7 @@ export const SignUp: FC = () => {
       }),
       body: { email, password },
     })
+      .then((response: any) => setToken(response))
       .then(() => {
         push("/")
       })
