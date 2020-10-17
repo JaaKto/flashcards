@@ -22,5 +22,6 @@ module.exports = (req, _, next) => {
     throw error
   }
   req.userId = decodedToken.userId
+  console.log('is-auth', decodedToken )
   next()
 }
