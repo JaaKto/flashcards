@@ -1,14 +1,35 @@
-const express = require("express");
-const bodyParser = require("body-parser");
+const express = require("express")
+const bodyParser = require("body-parser")
+const mongoose = require("mongoose")
+const cors = require("cors");
+require("dotenv").config()
+
+const authRoutes = require("./routes/auth");
+const flashcardsRoutes = require("./routes/flashcards");
 
 const app = express();
 
-const adminRoutes = require("./routes/admin");
-const flashcardsRoutes = require("./routes/flashcards");
+app.use(cors());
+app.use(bodyParser.json());
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use("/auth", authRoutes);
+app.use("/flashcards", flashcardsRoutes);
 
-app.use(adminRoutes);
-// app.use(flashcardsRoutes);
+app.use((error, _, res, next) => {
+  const status = error.statusCode || 500
+  const message = error.message
+  const data = error.data
+  res.status(status).json({ message: message, data: data })
+})
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((_) => {
+    console.log("Connected")
+    app.listen(4000)
+  })
+  .catch((err) => console.log(err))
 
-app.listen(4000);
+module.exports = app
