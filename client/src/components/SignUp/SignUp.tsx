@@ -1,5 +1,6 @@
 import React, { useState, FC, FormEvent, ChangeEvent } from "react"
 import { useHistory } from "react-router-dom"
+import { fetchData, setToken } from "common/utils"
 import { Input } from "common/UI"
 import { inputList } from "./utils"
 import * as S from "./SignUp.styles"
@@ -20,6 +21,21 @@ export const SignUp: FC = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     const { email, password } = state
     e.preventDefault()
+    fetchData("signup", {
+      method: "PUT",
+      headers: new Headers({
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+      }),
+      body: { email, password },
+    })
+      .then((response: any) => setToken(response))
+      .then(() => {
+        push("/")
+      })
+      .catch(({ message }: Error) => {
+        setError(message)
+      })
   }
   return (
     <S.SignUp>
