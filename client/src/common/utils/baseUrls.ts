@@ -5,3 +5,5 @@ const PORT: number = 4000
 export const LOGINURL = `${PROTOCOL}://${HOST}:${PORT}/auth/login`
 
 export const SINGUPURL = `${PROTOCOL}://${HOST}:${PORT}/auth/signup`
+
+export const FLASHCARDS = `${PROTOCOL}://${HOST}:${PORT}/flashcards/all`

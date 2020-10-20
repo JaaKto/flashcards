@@ -1,4 +1,4 @@
-import { LOGINURL, SINGUPURL } from "."
+import { LOGINURL, SINGUPURL, FLASHCARDS } from "."
 
 type ObjectMap = { [key: string]: unknown }
 interface Options {
@@ -21,7 +21,7 @@ const getUrl = (endpoint: string) => {
     case "signup":
       return SINGUPURL
     default:
-      return ""
+      return FLASHCARDS
   }
 }
 

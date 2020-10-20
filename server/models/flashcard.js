@@ -21,7 +21,7 @@ const flashCardSchema = new Schema(
       type: String,
       required: true,
     },
-    createBy: {
+    creator: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
