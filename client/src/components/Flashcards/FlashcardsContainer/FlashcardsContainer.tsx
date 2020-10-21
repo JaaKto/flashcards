@@ -1,14 +1,12 @@
-import React, { useEffect, FC } from "react"
-import { Flashcard, FlashcardList } from "../Flashcard"
+import React, { FC } from "react"
+import { Card, CardList } from "../Card"
 import * as S from "./FlashcardsContainer.styles"
+import { Flashcard } from "./Flashcard"
 
-export const FlashcardsContainer: FC<FlashcardList> = ({ flashcards }) => {
-  useEffect(() => {}, [flashcards])
-  return (
-    <S.FlashcardsContainer>
-      {flashcards.map(({ _id, from }: Flashcard) => (
-        <div key={_id}>{from}</div>
-      ))}
-    </S.FlashcardsContainer>
-  )
-}
+export const FlashcardsContainer: FC<CardList> = ({ flashcards }) => (
+  <S.FlashcardsContainer>
+    {flashcards.map((card: Card) => (
+      <Flashcard key={card._id} {...{ ...card }} />
+    ))}
+  </S.FlashcardsContainer>
+)
