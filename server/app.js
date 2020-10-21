@@ -5,6 +5,7 @@ const cors = require("cors");
 require("dotenv").config()
 
 const authRoutes = require("./routes/auth");
+const flashcardsRoutes = require("./routes/flashcards");
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use("/auth", authRoutes);
+app.use("/flashcards", flashcardsRoutes);
 
 app.use((error, _, res, next) => {
   const status = error.statusCode || 500
