@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
 import * as S from "./Flashcards.styles"
-import { Search } from "components/Search"
+import { Search } from "./Search"
 import { fetchData } from "common/utils"
-import { Card } from "./Card"
+import { Card } from "./Flashcard.types"
 import { FlashcardsContainer } from "./FlashcardsContainer/FlashcardsContainer"
 
 export default () => {
@@ -25,9 +25,9 @@ export default () => {
 
   return (
     <S.Flashcards>
+      <Search />
       <p>{`You have ${flashcards.length} Flashcards`}</p>
       <FlashcardsContainer {...{ flashcards }} />
-      <Search />
     </S.Flashcards>
   )
 }
