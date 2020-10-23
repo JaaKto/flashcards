@@ -6,6 +6,7 @@ require("dotenv").config()
 
 const authRoutes = require("./routes/auth");
 const flashcardsRoutes = require("./routes/flashcards");
+const translationRoutes = require("./routes/translation")
 
 const app = express();
 
@@ -14,8 +15,9 @@ app.use(bodyParser.json());
 
 app.use("/auth", authRoutes);
 app.use("/flashcards", flashcardsRoutes);
+app.use("/translation", translationRoutes);
 
-app.use((error, _, res, next) => {
+app.use((error, _, res) => {
   const status = error.statusCode || 500
   const message = error.message
   const data = error.data
