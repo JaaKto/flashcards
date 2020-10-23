@@ -1,4 +1,4 @@
-import { LOGINURL, SINGUPURL, FLASHCARDS } from "."
+import { BASE_URL, LOGINURL, SINGUPURL, FLASHCARDS, SearchUrl } from "."
 
 type ObjectMap = { [key: string]: unknown }
 interface Options {
@@ -20,8 +20,10 @@ const getUrl = (endpoint: string) => {
       return LOGINURL
     case "signup":
       return SINGUPURL
-    default:
+    case "/flashcards":
       return FLASHCARDS
+    default:
+      return SearchUrl(endpoint)
   }
 }
 
@@ -36,3 +38,12 @@ export const fetchData = <T>(
   })
     .then(handleError)
     .then((res) => res.json())
+
+export const fetchSuggestions = (phrase: string) =>
+  phrase &&
+  fetchData(phrase, {
+    method: "GET",
+    headers: new Headers({
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    }),
+  }).then((res) => console.log(res))

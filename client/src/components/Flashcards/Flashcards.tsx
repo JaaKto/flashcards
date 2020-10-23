@@ -8,7 +8,7 @@ import { FlashcardsContainer } from "./FlashcardsContainer/FlashcardsContainer"
 export default () => {
   const [flashcards, setFlashcards] = useState<Card[] | []>([])
   useEffect(() => {
-    fetchData(`/flashcards/all`, {
+    fetchData(`/flashcards`, {
       method: "GET",
       headers: new Headers({
         Authorization: `Bearer ${localStorage.getItem("token")}`,

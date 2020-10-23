@@ -1,6 +1,8 @@
 import React, { useState, useEffect, ChangeEvent } from "react"
 import { useHistory } from "react-router-dom"
 import { Input } from "common/UI"
+import { fetchSuggestions } from "common/utils"
+import { SuggestionList } from "./SuggestionList"
 import { searchState } from "../Flashcard.types"
 import { useDebounce } from "common/utils"
 import * as S from "./Search.styles"
@@ -21,6 +23,7 @@ export default () => {
 
   useEffect(() => {
     setState({ ...state, wordSearch: searchingWord })
+    fetchSuggestions(searchingWord)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchingWord])
   return (
@@ -31,11 +34,13 @@ export default () => {
         type="search"
         key="search"
         value={state.word}
-        handleChange={(e: ChangeEvent<HTMLInputElement>) =>
+        handleChange={(e: ChangeEvent<HTMLInputElement>) => {
+          console.log(state)
           setState({ ...state, word: e.target.value })
-        }
+        }}
       />
-      <button onClick={() => console.log(state)}>Click</button>
+      <SuggestionList {...{ ...state.suggestionList }} />
+      {/* <SuggestionList {...state.wordSearch} /> */}
     </S.Search>
   )
 }
