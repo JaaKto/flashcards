@@ -1,23 +1,27 @@
-import React, { FC } from "react"
+import React from "react"
+import { Link } from "react-router-dom"
 import * as S from "./SuggestionList.styles"
 
-interface Suggestion {
-  Object: { label: string; value: string; lang: string; [key: string]: string }
+type Suggestion = {
+  label: string
+  value: string
+  lang: string
+  [key: string]: string
 }
 
-const arr = [
-  { label: "samochód", value: "samochód", lang: "pl" },
-  { label: "samochodowy", value: "samochodowy", lang: "pl" },
-  { label: "samochodzik", value: "samochodzik", lang: "pl" },
-  { label: "samochwała", value: "samochwała", lang: "pl" },
-  { label: "samochwalczy", value: "samochwalczy", lang: "pl" },
-  { label: "samochwalstwo", value: "samochwalstwo", lang: "pl" },
-]
+type SuggestionProps = {
+  suggestionList: Suggestion[]
+}
 
-export const SuggestionList = (suggestionList: Suggestion[] | any[]) => (
-  // export const SuggestionList = (suggestionList: any) => (
-  <S.SuggestionList>
-    {arr.length && <S.Suggestion>Suggestions</S.Suggestion>}
-    {/* {suggestionList && arr.map((item: Suggestion) => )} */}
-  </S.SuggestionList>
-)
+export const SuggestionList = ({ suggestionList }: SuggestionProps) => {
+  console.log(suggestionList)
+  return (
+    <S.SuggestionList>
+      {suggestionList.map(({ label, value, lang }: Suggestion) => (
+        <S.SuggestionItem key={label}>
+          <Link to={`/search?word=${value}&from=${lang}&to=de`}>{label}</Link>
+        </S.SuggestionItem>
+      ))}
+    </S.SuggestionList>
+  )
+}

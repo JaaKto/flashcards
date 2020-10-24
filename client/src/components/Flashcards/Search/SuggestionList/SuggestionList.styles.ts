@@ -1,12 +1,18 @@
 import styled from "styled-components"
 
-export const SuggestionList = styled.div`
-  margin: auto;
-  padding: 20px 30px;
-  background-color: #454a53;
-  text-align: center;
+export const SuggestionList = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
-export const Suggestion = styled.div`
-  color: palegreen;
+export const SuggestionItem = styled.li`
+  font-size: 22px;
+  padding: 10px 15px;
+  a {
+    text-decoration: none;
+  }
 `

@@ -11,11 +11,13 @@ export interface Card {
 export interface CardList {
   flashcards: Card[]
 }
-export interface searchState {
+export type searchState = {
   word: string
   wordSearch: string
   from: string
   to: string
-  suggestionList: Array<string>
-  [key: string]: string | Array<string>
+  suggestionList: any
+  // suggestionList: Array<string>
+  // [key: string]: string | Array<string>
+  // [key: string]: string | []
 }

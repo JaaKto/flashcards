@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from "react"
 import { useHistory } from "react-router-dom"
 import { Input } from "common/UI"
-import { fetchSuggestions } from "common/utils"
+import { fetchData } from "common/utils"
 import { SuggestionList } from "./SuggestionList"
 import { searchState } from "../Flashcard.types"
 import { useDebounce } from "common/utils"
@@ -23,13 +23,30 @@ export default () => {
 
   useEffect(() => {
     setState({ ...state, wordSearch: searchingWord })
-    fetchSuggestions(searchingWord)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchingWord])
+
+  useEffect(() => {
+    if (state.wordSearch) {
+      fetchData(state.wordSearch, {
+        method: "GET",
+        headers: new Headers({
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }),
+      })
+        .then((response: any) => {
+          setState({ ...state, suggestionList: response })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.wordSearch])
   return (
     <S.Search>
       <Input
-        name="search"
+        name="search for new flashcard"
         placeholder="type to look for a new flashcard"
         type="search"
         key="search"
@@ -39,8 +56,7 @@ export default () => {
           setState({ ...state, word: e.target.value })
         }}
       />
-      <SuggestionList {...{ ...state.suggestionList }} />
-      {/* <SuggestionList {...state.wordSearch} /> */}
+      <SuggestionList {...state} />
     </S.Search>
   )
 }
