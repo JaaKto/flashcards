@@ -3,10 +3,13 @@ const querystring = require("querystring")
 const axios = require("axios")
 
 const languages = {
-  English: "en",
-  German: "de",
   Polish: "pl",
+  English: "en",
   French: "fr",
+  German: "de",
+  Italian: "it",
+  Russian: "ru",
+  Spanish: "es",
 }
 exports.languages = languages
 
@@ -27,7 +30,7 @@ exports.getTranslations = async (req, res, next) => {
     }
 
     const languageCode = to + from
-    const queryResult = await fetch("/dictionary?" + querystring.stringify({ l: languageCode, q: queryWord }))
+    const queryResult = await axiosPons.get("/dictionary?" + querystring.stringify({ l: languageCode, q: queryWord }))
     if (queryResult.status === 204) {
       return res.status(204).json({ message: queryResult.statusText })
     }

@@ -17,7 +17,7 @@ app.use("/auth", authRoutes);
 app.use("/flashcards", flashcardsRoutes);
 app.use("/translation", translationRoutes);
 
-app.use((error, _, res) => {
+app.use((error, req, res, next) => {
   const status = error.statusCode || 500
   const message = error.message
   const data = error.data

@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom"
 import { NavigationBar } from "./NavigationBar"
 import { HomePage } from "./HomePage"
 import { Flashcards } from "./Flashcards"
+import { AddFlashcard } from "./AddFlashcard"
 import { Login } from "./Login"
 import { SignUp } from "./SignUp"
 import * as S from "./App.styles"
@@ -15,7 +16,10 @@ const App = () => (
       <Route exact path="/" component={() => <HomePage />} />
       <Route exact path="/login" component={() => <Login />} />
       {isAuthenticated() ? (
-        <Route exact path="/flashcards" component={() => <Flashcards />} />
+        <>
+          <Route exact path="/flashcards" component={() => <Flashcards />} />
+          <Route path="/translation" component={() => <AddFlashcard />} />
+        </>
       ) : (
         <Redirect to={{ pathname: "/login" }} />
       )}

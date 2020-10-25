@@ -19,7 +19,7 @@ export const SuggestionList = ({ suggestionList }: SuggestionProps) => {
     <S.SuggestionList>
       {suggestionList.map(({ label, value, lang }: Suggestion) => (
         <S.SuggestionItem key={label}>
-          <Link to={`/search?word=${value}&from=${lang}&to=de`}>{label}</Link>
+          <Link to={`translation/${value}?from=${lang}&to=de`}>{label}</Link>
         </S.SuggestionItem>
       ))}
     </S.SuggestionList>
