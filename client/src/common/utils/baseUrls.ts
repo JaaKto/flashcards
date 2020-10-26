@@ -10,5 +10,7 @@ export const SINGUPURL = `${PROTOCOL}://${HOST}:${PORT}/auth/signup`
 
 export const FLASHCARDS = `${PROTOCOL}://${HOST}:${PORT}/flashcards/all`
 
+export const FLASHCARD = `${PROTOCOL}://${HOST}:${PORT}/flashcard`
+
 export const SearchUrl = (phrase: string) =>
   `${BASE_URL}translation/suggestion/${phrase}?from=pl&to=de`
