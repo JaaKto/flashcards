@@ -3,23 +3,23 @@ import * as S from "./NewFlashcard.styles"
 import { fetchData } from "common/utils"
 
 export const NewFlashcard: FC<any> = ({ target, source }) => {
+  const myHeaders = new Headers()
+  myHeaders.append("Content-Type", "application/json")
+  myHeaders.append("Authorization", `Bearer ${localStorage.getItem("token")}`)
   const saveFlashcard = () =>
     fetchData("/flashcard", {
       method: "POST",
-      headers: new Headers({
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      }),
+      headers: myHeaders,
       body: {
-        from: '<strong class="headword">Kot</strong>',
+        from: '<strong class="headword">test</strong>',
         fromLang: "pl",
         to:
-          'kał <span class="genus"><acronym title="masculine">m</acronym></span>',
+          'Hund <span class="genus"><acronym title="masculine">m</acronym></span>',
         toLang: "de",
         userId: "5f87724d7f0a666b3d8ff088",
       },
-    }).catch((err) => {
-      console.log(err)
     })
+
   const getHTML = (from: { __html: string }) => {
     return {
       __html: `${from}`,

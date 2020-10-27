@@ -21,7 +21,7 @@ exports.getFlashcards = async (req, res, next) => {
 }
 
 exports.createFlashcard = async (req, res, next) => {
-  const errors = validationResult(req)
+  const errors = validationResult(req.body)
   if (!errors.isEmpty()) {
     const error = new Error("Validation failed, entered data is incorrect.")
     error.statusCode = 422

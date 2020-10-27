@@ -11,7 +11,7 @@ type ObjectMap = { [key: string]: unknown }
 interface Options {
   method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH"
   headers?: Headers
-  body?: ObjectMap
+  body?: any
 }
 
 const handleError = (res: Response) => {

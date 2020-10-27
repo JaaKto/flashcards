@@ -8,7 +8,7 @@ export const LOGINURL = `${PROTOCOL}://${HOST}:${PORT}/auth/login`
 
 export const SINGUPURL = `${PROTOCOL}://${HOST}:${PORT}/auth/signup`
 
-export const FLASHCARDS = `${PROTOCOL}://${HOST}:${PORT}/flashcards/all`
+export const FLASHCARDS = `${PROTOCOL}://${HOST}:${PORT}/flashcard/all`
 
 export const FLASHCARD = `${PROTOCOL}://${HOST}:${PORT}/flashcard`
 
