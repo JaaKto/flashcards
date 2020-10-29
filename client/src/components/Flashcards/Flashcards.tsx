@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import * as S from "./Flashcards.styles"
 import { Search } from "./Search"
 import { fetchData } from "common/utils"
 import { Card } from "./Flashcard.types"
 import { FlashcardsContainer } from "./FlashcardsContainer/FlashcardsContainer"
+import { Types, AppContext } from "common/context"
 
 export default () => {
+  const { state, dispatch } = useContext(AppContext)
   const [flashcards, setFlashcards] = useState<Card[] | []>([])
   useEffect(() => {
     fetchData(`/flashcards`, {
@@ -26,6 +28,7 @@ export default () => {
   return (
     <S.Flashcards>
       <Search />
+      <button onClick={() => console.log(state.status, Types)}>Click</button>
       <p>{`You have ${flashcards.length} Flashcards`}</p>
       <FlashcardsContainer {...{ flashcards }} />
     </S.Flashcards>
