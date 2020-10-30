@@ -8,7 +8,7 @@ import { Login } from "./Login"
 import { SignUp } from "./SignUp"
 import * as S from "./App.styles"
 import { isAuthenticated } from "common/utils"
-import { AppProvider } from "common/context"
+import { AppProvider } from "common/services"
 
 const App = () => (
   <AppProvider>
