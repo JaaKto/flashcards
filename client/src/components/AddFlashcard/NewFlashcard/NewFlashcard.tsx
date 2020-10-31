@@ -1,34 +1,77 @@
-import React, { FC, useState } from "react"
+import React, { FC, useContext } from "react"
 import * as S from "./NewFlashcard.styles"
 import { fetchData } from "common/utils"
+import {
+  Flashcard,
+  FlashcardContext,
+  deleteFlashcard,
+  addFlashcard,
+} from "common/services"
 
 export const NewFlashcard: FC<any> = ({ target, source }) => {
-  const saveFlashcard = () =>
+  const { state, dispatch } = useContext(FlashcardContext)
+  const isPresent = state.flashcards
+    .reduce((acc: string[], curr: Flashcard) => [...curr.to, ...acc], [])
+    .includes(target)
+
+  const getFlashcardId: any = state.flashcards.find(
+    (item: Flashcard) => item.from === source && item.to.includes(target),
+  )
+
+  const saveFlashcard = () => {
+    const body = {
+      from: source,
+      fromLang: "pl",
+      to: target,
+      toLang: "de",
+      userId: localStorage.getItem("userId"),
+    }
     fetchData("/flashcard", {
       method: "POST",
       headers: new Headers({
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json;charset=UTF-8",
       }),
-      body: {
-        from: '<strong class="headword">test2</strong>',
-        fromLang: "pl",
-        to:
-          'Hund <span class="genus"><acronym title="masculine">m</acronym></span>',
-        toLang: "de",
-        userId: "5f87724d7f0a666b3d8ff088",
-      },
+      body: body,
     })
+    // addFlashcard(body)
+  }
+
+  const removeFlashcard = () => {
+    fetchData(`flashcard/${getFlashcardId._id}`, {
+      method: "DELETE",
+      headers: new Headers({
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json;charset=UTF-8",
+      }),
+    })
+    dispatch(deleteFlashcard(getFlashcardId._id))
+  }
 
   const getHTML = (from: { __html: string }) => {
     return {
       __html: `${from}`,
     }
   }
+
+  const handleClick = () =>
+    isPresent
+      ? (console.log("remove"), removeFlashcard())
+      : (console.log("save"), saveFlashcard())
+
+  console.log(isPresent)
+  console.log(state.flashcards)
   return (
-    <S.Flashcard>
+    <S.Flashcard {...isPresent}>
       <p dangerouslySetInnerHTML={getHTML(target)} />
-      <button onClick={() => saveFlashcard()}>save flashcard</button>
+      <button
+        onClick={
+          // console.log(getFlashcardId._id)
+          // isPresent ? () => removeFlashcard() : saveFlashcard()
+          () => handleClick()
+          // () => removeFlashcard()
+        }
+      >{`${isPresent ? "delete" : "add"} flashcard`}</button>
     </S.Flashcard>
   )
 }

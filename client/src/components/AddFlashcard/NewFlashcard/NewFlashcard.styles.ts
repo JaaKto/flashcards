@@ -6,4 +6,5 @@ export const Flashcard = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-color: ${(isPresent) => (isPresent ? "green" : "red")};
 `

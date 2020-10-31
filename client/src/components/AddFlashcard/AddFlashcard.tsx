@@ -1,10 +1,10 @@
-import React, { useState, useEffect, FC } from "react"
+import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import { fetchData } from "common/utils"
 import * as S from "./AddFlashcard.styles"
 import { NewFlashcard } from "./NewFlashcard"
 
-export const AddFlashcard = () => {
+export default () => {
   const [state, setState] = useState<any>([])
   const {
     location: { search, pathname },
@@ -19,12 +19,12 @@ export const AddFlashcard = () => {
     })
       .then((response: any) => {
         setState(response[0][0])
+        console.log(response[0][0])
       })
       .catch((err) => {
         console.log(err)
       })
   }, [])
-  console.log(state)
   return (
     <S.FlashcardsContainer>
       <p dangerouslySetInnerHTML={{ __html: state.header }} />

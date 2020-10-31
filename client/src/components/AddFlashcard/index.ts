@@ -1,3 +1,3 @@
 import { formatDiagnostic } from "typescript"
 
-export * from "./AddFlashcard"
+export { default as AddFlashcard } from "./AddFlashcard"

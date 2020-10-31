@@ -28,6 +28,8 @@ const getUrl = (endpoint: string) => {
     return SINGUPURL
   } else if (endpoint.includes("flashcards")) {
     return FLASHCARDS
+  } else if (endpoint.includes("flashcard/")) {
+    return BASE_URL + endpoint
   } else if (endpoint.includes("flashcard")) {
     return FLASHCARD
   } else if (endpoint.includes("translation")) {

@@ -52,7 +52,6 @@ export default () => {
         key="search"
         value={state.word}
         handleChange={(e: ChangeEvent<HTMLInputElement>) => {
-          console.log(state)
           setState({ ...state, word: e.target.value })
         }}
       />
