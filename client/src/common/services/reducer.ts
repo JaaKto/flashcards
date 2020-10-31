@@ -1,4 +1,5 @@
 import {
+  GET_FLASHCARDS,
   ADD_FLASHCARD,
   DELETE_FLASHCARD,
   SET_STATUS,
@@ -9,6 +10,8 @@ import {
 
 export const flashcardReducer = (state: InitialState, action: Action) => {
   switch (action.type) {
+    case GET_FLASHCARDS:
+      return { ...state, flashcards: action.payload }
     case ADD_FLASHCARD:
       return { ...state, flashcards: [...state.flashcards, action.payload] }
     case DELETE_FLASHCARD:

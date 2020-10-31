@@ -1,14 +1,12 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useEffect, useContext } from "react"
 import * as S from "./Flashcards.styles"
 import { Search } from "./Search"
 import { fetchData } from "common/utils"
-import { Card } from "./Flashcard.types"
-import { FlashcardsContainer } from "./FlashcardsContainer/FlashcardsContainer"
-import { AppContext, setError } from "common/services"
+import { Flashcard } from "./Flashcard/Flashcard"
+import { FlashcardContext, getFlashcard, setError } from "common/services"
 
 export default () => {
-  const { state, dispatch } = useContext(AppContext)
-  const [flashcards, setFlashcards] = useState<Card[] | []>([])
+  const { state, dispatch } = useContext(FlashcardContext)
   useEffect(() => {
     fetchData(`/flashcards`, {
       method: "GET",
@@ -17,27 +15,21 @@ export default () => {
       }),
     })
       .then((response: any) => {
-        setFlashcards(response.flashcards)
+        dispatch(getFlashcard(response.flashcards))
       })
       .catch((err) => {
-        console.log(err)
+        dispatch(setError(err))
       })
   }, [])
-  console.log(flashcards)
 
   return (
     <S.Flashcards>
       <Search />
-      <button
-        onClick={() => {
-          dispatch(setError("test err"))
-          console.log(state.status)
-        }}
-      >
-        Click
-      </button>
-      <p>{`You have ${flashcards.length} Flashcards`}</p>
-      <FlashcardsContainer {...{ flashcards }} />
+      <S.FlashcardsContainer>
+        {state.flashcards.map((card) => (
+          <Flashcard key={card._id} {...{ ...card }} />
+        ))}
+      </S.FlashcardsContainer>
     </S.Flashcards>
   )
 }

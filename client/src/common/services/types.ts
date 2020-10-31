@@ -1,4 +1,15 @@
-import { ADD_FLASHCARD, DELETE_FLASHCARD, SET_STATUS, SET_ERROR } from "."
+import {
+  GET_FLASHCARDS,
+  ADD_FLASHCARD,
+  DELETE_FLASHCARD,
+  SET_STATUS,
+  SET_ERROR,
+} from "."
+
+export interface GetFlashcards {
+  type: typeof GET_FLASHCARDS
+  payload: Flashcard[]
+}
 
 export interface AddFlashcard {
   type: typeof ADD_FLASHCARD
@@ -34,4 +45,9 @@ export interface InitialState {
   error: string | null
 }
 
-export type Action = AddFlashcard | DeleteFlashcard | SetStatus | SetError
+export type Action =
+  | GetFlashcards
+  | AddFlashcard
+  | DeleteFlashcard
+  | SetStatus
+  | SetError

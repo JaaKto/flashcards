@@ -7,7 +7,7 @@ const initialState = {
   error: null,
 }
 
-export const AppContext = createContext<{
+export const FlashcardContext = createContext<{
   state: InitialState
   dispatch: Dispatch<any>
 }>({
@@ -18,8 +18,8 @@ export const AppContext = createContext<{
 export const AppProvider: FC = ({ children }) => {
   const [state, dispatch] = useReducer(flashcardReducer, initialState)
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    <FlashcardContext.Provider value={{ state, dispatch }}>
       {children}
-    </AppContext.Provider>
+    </FlashcardContext.Provider>
   )
 }

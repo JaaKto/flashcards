@@ -14,7 +14,6 @@ type SuggestionProps = {
 }
 
 export const SuggestionList = ({ suggestionList }: SuggestionProps) => {
-  console.log(suggestionList)
   return (
     <S.SuggestionList>
       {suggestionList.map(({ label, value, lang }: Suggestion) => (
