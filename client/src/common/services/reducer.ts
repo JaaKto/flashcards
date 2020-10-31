@@ -1,22 +1,29 @@
-import { InitialState, types } from "./types"
+import {
+  ADD_FLASHCARD,
+  DELETE_FLASHCARD,
+  SET_STATUS,
+  SET_ERROR,
+  InitialState,
+  Action,
+} from "."
 
-export const flashcardReducer = (state: InitialState, action: any) => {
+export const flashcardReducer = (state: InitialState, action: Action) => {
   switch (action.type) {
-    case types.ADD_FLASHCARD:
+    case ADD_FLASHCARD:
       return { ...state, flashcards: [...state.flashcards, action.payload] }
-    case types.DELETE_FLASHCARD:
+    case DELETE_FLASHCARD:
       return {
         ...state,
         flashcards: state.flashcards.filter(
-          (item) => item._id !== action.payload._id,
+          (item) => item._id !== action.payload,
         ),
       }
-    case types.SET_STATUS:
+    case SET_STATUS:
       return {
         ...state,
         status: action.payload,
       }
-    case types.DELETE_FLASHCARD:
+    case SET_ERROR:
       return {
         ...state,
         error: action.payload,

@@ -4,7 +4,7 @@ import { Search } from "./Search"
 import { fetchData } from "common/utils"
 import { Card } from "./Flashcard.types"
 import { FlashcardsContainer } from "./FlashcardsContainer/FlashcardsContainer"
-import { types, AppContext } from "common/services"
+import { AppContext, setError } from "common/services"
 
 export default () => {
   const { state, dispatch } = useContext(AppContext)
@@ -28,7 +28,14 @@ export default () => {
   return (
     <S.Flashcards>
       <Search />
-      <button onClick={() => console.log(state.status, types)}>Click</button>
+      <button
+        onClick={() => {
+          dispatch(setError("test err"))
+          console.log(state.status)
+        }}
+      >
+        Click
+      </button>
       <p>{`You have ${flashcards.length} Flashcards`}</p>
       <FlashcardsContainer {...{ flashcards }} />
     </S.Flashcards>

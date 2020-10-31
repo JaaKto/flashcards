@@ -1,6 +1,5 @@
-import React, { createContext, useReducer, Dispatch } from "react"
-import { flashcardReducer } from "./reducer"
-import { InitialState } from "./types"
+import React, { FC, createContext, useReducer, Dispatch } from "react"
+import { flashcardReducer, InitialState } from "."
 
 const initialState = {
   flashcards: [],
@@ -16,9 +15,8 @@ export const AppContext = createContext<{
   dispatch: () => null,
 })
 
-export const AppProvider: React.FC = ({ children }) => {
+export const AppProvider: FC = ({ children }) => {
   const [state, dispatch] = useReducer(flashcardReducer, initialState)
-
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       {children}

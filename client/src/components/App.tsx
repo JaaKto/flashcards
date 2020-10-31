@@ -1,4 +1,4 @@
-import React, { createContext } from "react"
+import React from "react"
 import { Route, Switch, Redirect } from "react-router-dom"
 import { NavigationBar } from "./NavigationBar"
 import { HomePage } from "./HomePage"

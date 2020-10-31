@@ -1,24 +1,19 @@
-export const types = {
-  ADD_FLASHCARD: "ADD_FLASHCARD",
-  DELETE_FLASHCARD: "DELETE_FLASHCARD",
-  SET_STATUS: "SET_STATUS",
-  SET_ERRORS: "SET_ERRORS",
-}
+import { ADD_FLASHCARD, DELETE_FLASHCARD, SET_STATUS, SET_ERROR } from "."
 
 export interface AddFlashcard {
-  type: typeof types.ADD_FLASHCARD
+  type: typeof ADD_FLASHCARD
   payload: Flashcard
 }
 export interface DeleteFlashcard {
-  type: typeof types.DELETE_FLASHCARD
+  type: typeof DELETE_FLASHCARD
   payload: string
 }
 export interface SetStatus {
-  type: typeof types.SET_STATUS
+  type: typeof SET_STATUS
   payload: string
 }
-export interface SetErrors {
-  type: typeof types.SET_ERRORS
+export interface SetError {
+  type: typeof SET_ERROR
   payload: string
 }
 
@@ -39,12 +34,4 @@ export interface InitialState {
   error: string | null
 }
 
-export interface Errors {
-  [key: string]: string
-}
-
-export interface SubmitError {
-  message: string
-}
-
-export type Action = AddFlashcard | DeleteFlashcard | SetStatus | SetErrors
+export type Action = AddFlashcard | DeleteFlashcard | SetStatus | SetError
