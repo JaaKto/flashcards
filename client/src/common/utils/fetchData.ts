@@ -7,7 +7,6 @@ import {
   BASE_URL,
 } from "."
 
-type ObjectMap = { [key: string]: unknown }
 interface Options {
   method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH"
   headers?: Headers

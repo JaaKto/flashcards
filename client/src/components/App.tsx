@@ -13,18 +13,20 @@ import { FlashcardContext, getFlashcard, setError } from "common/services"
 const App = () => {
   const { dispatch } = useContext(FlashcardContext)
   useEffect(() => {
-    fetchData(`/flashcards`, {
-      method: "GET",
-      headers: new Headers({
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      }),
-    })
-      .then((response: any) => {
-        dispatch(getFlashcard(response.flashcards))
+    if (isAuthenticated()) {
+      fetchData(`/flashcards`, {
+        method: "GET",
+        headers: new Headers({
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }),
       })
-      .catch((err) => {
-        dispatch(setError(err))
-      })
+        .then((response: any) => {
+          dispatch(getFlashcard(response.flashcards))
+        })
+        .catch((err) => {
+          dispatch(setError(err))
+        })
+    }
   }, [])
   return (
     <S.App>

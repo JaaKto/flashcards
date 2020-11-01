@@ -1,7 +1,7 @@
 import React, { FC, createContext, useReducer, Dispatch } from "react"
 import { flashcardReducer, InitialState } from "."
 
-const initialState = {
+export const initialState = {
   flashcards: [],
   status: "idle",
   error: null,

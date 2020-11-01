@@ -6,6 +6,7 @@ import {
   FlashcardContext,
   deleteFlashcard,
   addFlashcard,
+  setError,
 } from "common/services"
 
 export const NewFlashcard: FC<any> = ({ target, source }) => {
@@ -34,7 +35,8 @@ export const NewFlashcard: FC<any> = ({ target, source }) => {
       }),
       body: body,
     })
-    // addFlashcard(body)
+      .then((res: any) => dispatch(addFlashcard(res.flashcard)))
+      .catch((err) => dispatch(setError(err)))
   }
 
   const removeFlashcard = () => {
@@ -54,24 +56,14 @@ export const NewFlashcard: FC<any> = ({ target, source }) => {
     }
   }
 
-  const handleClick = () =>
-    isPresent
-      ? (console.log("remove"), removeFlashcard())
-      : (console.log("save"), saveFlashcard())
+  const handleClick = () => (isPresent ? removeFlashcard() : saveFlashcard())
 
-  console.log(isPresent)
-  console.log(state.flashcards)
   return (
     <S.Flashcard {...isPresent}>
       <p dangerouslySetInnerHTML={getHTML(target)} />
-      <button
-        onClick={
-          // console.log(getFlashcardId._id)
-          // isPresent ? () => removeFlashcard() : saveFlashcard()
-          () => handleClick()
-          // () => removeFlashcard()
-        }
-      >{`${isPresent ? "delete" : "add"} flashcard`}</button>
+      <button onClick={() => handleClick()}>{`${
+        isPresent ? "delete" : "add"
+      } flashcard`}</button>
     </S.Flashcard>
   )
 }
