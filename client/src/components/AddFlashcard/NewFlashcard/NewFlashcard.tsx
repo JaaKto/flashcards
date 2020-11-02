@@ -59,7 +59,7 @@ export const NewFlashcard: FC<any> = ({ target, source }) => {
   const handleClick = () => (isPresent ? removeFlashcard() : saveFlashcard())
 
   return (
-    <S.Flashcard {...isPresent}>
+    <S.Flashcard {...{ isPresent }}>
       <p dangerouslySetInnerHTML={getHTML(target)} />
       <button onClick={() => handleClick()}>{`${
         isPresent ? "delete" : "add"

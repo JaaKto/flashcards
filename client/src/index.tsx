@@ -7,15 +7,10 @@ import * as serviceWorker from "./serviceWorker"
 import { AppProvider } from "common/services"
 
 ReactDOM.render(
-  <BrowserRouter>
-    <AppProvider>
-      <S.GlobalStyle />
-      <Switch>
-        <Route path="/" component={App} />
-      </Switch>
-      <App />
-    </AppProvider>
-  </BrowserRouter>,
+  <>
+    <S.GlobalStyle />
+    <App />
+  </>,
   document.getElementById("root"),
 )
 
