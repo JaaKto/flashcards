@@ -4,14 +4,13 @@ import { BrowserRouter, Route, Switch } from "react-router-dom"
 import App from "./components/App"
 import * as S from "./index.styles"
 import * as serviceWorker from "./serviceWorker"
+import { AppProvider } from "common/services"
 
 ReactDOM.render(
-  <BrowserRouter>
+  <>
     <S.GlobalStyle />
-    <Switch>
-      <Route path="/" component={App} />
-    </Switch>
-  </BrowserRouter>,
+    <App />
+  </>,
   document.getElementById("root"),
 )
 

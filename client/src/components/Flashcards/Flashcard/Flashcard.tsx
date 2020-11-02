@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import * as S from "./Flashcard.styles"
-import { Card } from "../../Card"
+import { Card } from "../Flashcard.types"
 
 export const Flashcard: FC<Card> = ({
   to,

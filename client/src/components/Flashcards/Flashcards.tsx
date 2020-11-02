@@ -1,33 +1,19 @@
-import React, { useState, useEffect } from "react"
+import React, { useContext } from "react"
 import * as S from "./Flashcards.styles"
-import { Search } from "components/Search"
-import { fetchData } from "common/utils"
-import { Card } from "./Card"
-import { FlashcardsContainer } from "./FlashcardsContainer/FlashcardsContainer"
+import { Search } from "./Search"
+import { Flashcard } from "./Flashcard/Flashcard"
+import { FlashcardContext } from "common/services"
 
 export default () => {
-  const [flashcards, setFlashcards] = useState<Card[] | []>([])
-  useEffect(() => {
-    fetchData(`/flashcards/all`, {
-      method: "GET",
-      headers: new Headers({
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      }),
-    })
-      .then((response: any) => {
-        setFlashcards(response.flashcards)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
-  console.log(flashcards)
-
+  const { state } = useContext(FlashcardContext)
   return (
     <S.Flashcards>
-      <p>{`You have ${flashcards.length} Flashcards`}</p>
-      <FlashcardsContainer {...{ flashcards }} />
       <Search />
+      <S.FlashcardsContainer>
+        {state.flashcards.map((card) => (
+          <Flashcard key={card._id} {...{ ...card }} />
+        ))}
+      </S.FlashcardsContainer>
     </S.Flashcards>
   )
 }

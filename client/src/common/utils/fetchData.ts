@@ -1,10 +1,16 @@
-import { LOGINURL, SINGUPURL, FLASHCARDS } from "."
+import {
+  LOGINURL,
+  SINGUPURL,
+  FLASHCARDS,
+  FLASHCARD,
+  SearchUrl,
+  BASE_URL,
+} from "."
 
-type ObjectMap = { [key: string]: unknown }
 interface Options {
   method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH"
   headers?: Headers
-  body?: ObjectMap
+  body?: any
 }
 
 const handleError = (res: Response) => {
@@ -15,13 +21,20 @@ const handleError = (res: Response) => {
 }
 
 const getUrl = (endpoint: string) => {
-  switch (endpoint) {
-    case "login":
-      return LOGINURL
-    case "signup":
-      return SINGUPURL
-    default:
-      return FLASHCARDS
+  if (endpoint.includes("login")) {
+    return LOGINURL
+  } else if (endpoint.includes("signup")) {
+    return SINGUPURL
+  } else if (endpoint.includes("flashcards")) {
+    return FLASHCARDS
+  } else if (endpoint.includes("flashcard/")) {
+    return BASE_URL + endpoint
+  } else if (endpoint.includes("flashcard")) {
+    return FLASHCARD
+  } else if (endpoint.includes("translation")) {
+    return BASE_URL + endpoint
+  } else {
+    return SearchUrl(endpoint)
   }
 }
 
