@@ -15,6 +15,13 @@ import {
   AppProvider,
 } from "common/services"
 
+const RequireAuth = ({ children }: any) => {
+  if (!isAuthenticated()) {
+    return <Redirect to={{ pathname: "/login" }} />
+  }
+  return children
+}
+
 const App = () => {
   const { dispatch } = useContext(FlashcardContext)
   useEffect(() => {
@@ -42,18 +49,14 @@ const App = () => {
             <Route exact path="/" component={() => <HomePage />} />
             <Route exact path="/login" component={() => <Login />} />
             <Route exact path="/signup" component={() => <SignUp />} />
-            {isAuthenticated() ? (
-              <>
-                <Route
-                  exact
-                  path="/flashcards"
-                  component={() => <Flashcards />}
-                />
-                <Route path="/translation" component={() => <AddFlashcard />} />
-              </>
-            ) : (
-              <Redirect to={{ pathname: "/login" }} />
-            )}
+            <RequireAuth>
+              <Route
+                exact
+                path="/flashcards"
+                component={() => <Flashcards />}
+              />
+              <Route path="/translation" component={() => <AddFlashcard />} />
+            </RequireAuth>
           </Switch>
         </S.App>
       </AppProvider>

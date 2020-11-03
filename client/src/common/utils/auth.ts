@@ -10,12 +10,9 @@ export const setToken = (response: Response) => {
   return response
 }
 
-export const logOut = () => {
-  localStorage.clear()
-  return false
-}
+export const logOut = () => localStorage.clear()
 
 export const isAuthenticated = () => {
   const expiryDate = localStorage.getItem("expiryDate")
-  return !!expiryDate && new Date() < new Date(expiryDate) ? true : logOut()
+  return !!expiryDate && new Date() < new Date(expiryDate)
 }
