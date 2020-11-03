@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react"
+import React, { useEffect, useContext, FC, ReactElement } from "react"
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom"
 import { NavigationBar } from "./NavigationBar"
 import { HomePage } from "./HomePage"
@@ -15,14 +15,16 @@ import {
   AppProvider,
 } from "common/services"
 
-const RequireAuth = ({ children }: any) => {
+type Props = { children: ReactElement<any, any> | null }
+
+const RequireAuth = ({ children }: Props) => {
   if (!isAuthenticated()) {
     return <Redirect to={{ pathname: "/login" }} />
   }
   return children
 }
 
-const App = () => {
+const App: FC = () => {
   const { dispatch } = useContext(FlashcardContext)
   useEffect(() => {
     if (isAuthenticated()) {
@@ -55,8 +57,8 @@ const App = () => {
                 path="/flashcards"
                 component={() => <Flashcards />}
               />
-              <Route path="/translation" component={() => <AddFlashcard />} />
             </RequireAuth>
+            <Route path="/translation" component={() => <AddFlashcard />} />
           </Switch>
         </S.App>
       </AppProvider>
