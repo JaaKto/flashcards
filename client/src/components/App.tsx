@@ -52,13 +52,15 @@ const App: FC = () => {
             <Route exact path="/login" component={() => <Login />} />
             <Route exact path="/signup" component={() => <SignUp />} />
             <RequireAuth>
-              <Route
-                exact
-                path="/flashcards"
-                component={() => <Flashcards />}
-              />
+              <>
+                <Route path="/translation" component={() => <AddFlashcard />} />
+                <Route
+                  exact
+                  path="/flashcards"
+                  component={() => <Flashcards />}
+                />
+              </>
             </RequireAuth>
-            <Route path="/translation" component={() => <AddFlashcard />} />
           </Switch>
         </S.App>
       </AppProvider>
