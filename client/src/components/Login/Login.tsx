@@ -52,7 +52,7 @@ export const Login: FC = () => {
           />
         ))}
         {error && <p>invalid data, try again</p>}
-        <button type="submit">Submit</button>
+        <button type="submit">Log In</button>
       </form>
     </S.LogIn>
   )

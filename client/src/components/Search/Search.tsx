@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom"
 import { Input } from "common/UI"
 import { fetchData } from "common/utils"
 import { SuggestionList } from "./SuggestionList"
-import { searchState } from "../Flashcard.types"
+import { searchState } from "./Search.types"
 import { useDebounce } from "common/utils"
 import * as S from "./Search.styles"
 
@@ -46,8 +46,8 @@ export default () => {
   return (
     <S.Search>
       <Input
-        name="search for new flashcard"
-        placeholder="type to look for a new flashcard"
+        name="search"
+        placeholder=""
         type="search"
         key="search"
         value={state.word}
@@ -55,7 +55,7 @@ export default () => {
           setState({ ...state, word: e.target.value })
         }}
       />
-      <SuggestionList {...state} />
+      <SuggestionList {...{ state, setState }} />
     </S.Search>
   )
 }

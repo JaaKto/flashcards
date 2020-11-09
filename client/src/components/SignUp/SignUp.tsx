@@ -52,7 +52,7 @@ export const SignUp: FC = () => {
           />
         ))}
         {error && <p>invalid data, try again</p>}
-        <button type="submit">Submit</button>
+        <button type="submit">Sign up</button>
       </form>
     </S.SignUp>
   )

@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const NavBar = styled.nav`
-  background-color: #24292e;
+  background-color: #386641;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -21,7 +21,7 @@ export const ListItem = styled.li`
   a {
     text-decoration: none;
     color: ${(props: { isActive: boolean }) =>
-      props.isActive ? "#ffffffb3" : "white"};
+      props.isActive ? "#ffffffb3" : "#F2E8CF"};
     &:hover {
       color: #ffffffb3;
     }

@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom"
 import { navigationList, userPanelList } from "./utils"
 import { isAuthenticated, logOut } from "common/utils"
 import * as S from "./NavigationBar.styles"
+import { Search } from "../Search"
 
 export const NavigationBar = () => {
   const isLogged = isAuthenticated()
@@ -19,6 +20,7 @@ export const NavigationBar = () => {
               </S.ListItem>
             ))}
         </S.List>
+        {isAuthenticated() && <Search />}
         <S.List>
           {userPanelList
             .filter(({ authorized }) => isLogged === authorized)
