@@ -10,6 +10,5 @@ export const FlashcardsContainer = styled.div`
 export const Flashcards = styled.div`
   margin: auto;
   padding: 20px 30px;
-  background-color: #454a53;
   text-align: center;
 `
